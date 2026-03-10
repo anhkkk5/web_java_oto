@@ -28,11 +28,11 @@ public class CustomUserDetails implements UserDetails {
     }
 
     public static CustomUserDetails create(User user) {
-        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getName());
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getName().name());
         
         return new CustomUserDetails(
                 user.getId(),
-                user.getUsername(),
+                user.getEmail(),
                 user.getEmail(),
                 user.getPassword(),
                 Collections.singletonList(authority),

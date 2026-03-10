@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 @Configuration
 @EnableWebSecurity
@@ -24,15 +25,17 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtTokenProvider tokenProvider;
+    private final StringRedisTemplate stringRedisTemplate;
 
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService, JwtTokenProvider tokenProvider) {
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService, JwtTokenProvider tokenProvider, StringRedisTemplate stringRedisTemplate) {
         this.customUserDetailsService = customUserDetailsService;
         this.tokenProvider = tokenProvider;
+        this.stringRedisTemplate = stringRedisTemplate;
     }
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter(tokenProvider, customUserDetailsService);
+        return new JwtAuthenticationFilter(tokenProvider, customUserDetailsService, stringRedisTemplate);
     }
 
     @Bean
@@ -59,7 +62,15 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                    "/auth/**", 
+                    "/auth/register",
+                    "/auth/send-otp",
+                    "/auth/resend-otp",
+                    "/auth/verify-otp",
+                    "/auth/login",
+                    "/auth/refresh-token",
+                    "/auth/forgot-password",
+                    "/auth/verify-forgot-password-otp",
+                    "/auth/reset-password",
                     "/swagger-ui/**", 
                     "/swagger-ui.html",
                     "/v3/api-docs/**",

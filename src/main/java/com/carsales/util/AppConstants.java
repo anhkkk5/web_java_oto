@@ -1,5 +1,7 @@
 package com.carsales.util;
 
+import com.carsales.enums.RoleType;
+
 public class AppConstants {
     
     // Pagination
@@ -13,8 +15,8 @@ public class AppConstants {
     public static final String HEADER_STRING = "Authorization";
     
     // Roles
-    public static final String ROLE_USER = "ROLE_USER";
-    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final RoleType ROLE_CUSTOMER = RoleType.ROLE_CUSTOMER;
+    public static final RoleType ROLE_ADMIN = RoleType.ROLE_ADMIN;
     
     // Cache Keys
     public static final String CACHE_CAR_PREFIX = "car:";

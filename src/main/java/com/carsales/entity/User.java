@@ -25,6 +25,9 @@ public class User {
     
     @Column(length = 20)
     private String phone;
+
+    @Column(columnDefinition = "TEXT")
+    private String avatar;
     
     @Column(columnDefinition = "TEXT")
     private String address;
@@ -35,6 +38,9 @@ public class User {
     
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
+
+    @Column(name = "is_verified", nullable = false)
+    private Boolean isVerified = false;
     
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -104,6 +110,14 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
     
     public String getAddress() {
         return address;
@@ -127,6 +141,14 @@ public class User {
     
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public Boolean getIsVerified() {
+        return isVerified;
+    }
+
+    public void setIsVerified(Boolean isVerified) {
+        this.isVerified = isVerified;
     }
     
     public LocalDateTime getCreatedAt() {

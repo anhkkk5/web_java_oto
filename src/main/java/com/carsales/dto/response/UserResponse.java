@@ -7,8 +7,10 @@ public class UserResponse {
     private String fullName;
     private String phone;
     private String address;
+    private String avatar;
     private String role;
     private Boolean isActive;
+    private String createdAt;
     
     public UserResponse() {
     }
@@ -60,6 +62,14 @@ public class UserResponse {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
     
     public String getRole() {
         return role;
@@ -75,5 +85,13 @@ public class UserResponse {
     
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }
